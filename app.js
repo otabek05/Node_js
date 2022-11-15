@@ -1,24 +1,28 @@
 const express=require('express')
 const app=express()
 
+//register view engine
+
+app.set('view engine', 'ejs')
+
 app.listen(3000,()=>{
     console.log('Server is running!!!')
 })
 
 app.get('/', (req,res)=>{
-    res.sendFile('./views/main.html',{root:__dirname})
+    res.render('main');
 })
 
 app.get('/about', (req,res)=>{
-    res.sendFile('./views/about.html',{root:__dirname})
+    res.render('about');
 })
 
-app.get('/log', (req,res)=>{
-    res.sendFile('./views/log.html',{root:__dirname})
-})
 
+app.get('/blogs/create', (req,res)=>{
+    res.render('blogs')
+})
 
 app.use((req,res)=>{
-    res.sendFile('./views/404.html',{root:__dirname})
+    res.render('404')
     console.log('404 file sent')
 })
