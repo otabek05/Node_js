@@ -1,21 +1,54 @@
 const express=require('express')
 const app=express()
 const morgan=require('morgan')
+const mongoose=require('mongoose')
+const Blog=require('./models/blogs')
+// connect to mongoDB
+const dbURI="mongodb+srv://otash:otabek@cluster0.ywryelu.mongodb.net/node_js?retryWrites=true&w=majority"
+mongoose.connect(dbURI)
+  .then((result)=>{
+    console.log('Connected to db')
+    app.listen(3000,()=>{
+    console.log('Server is running')
+  })})
+  .catch((err)=>{console.log(err)});
 
 //register view engine
 
 app.set('view engine', 'ejs')
 
-app.listen(3000,()=>{
-    console.log('Server is running!!!')
-})
 
 // middleware 
 app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}))
 
+//mongooose and mongo sendbox
+app.get('/add-blog',(req,res)=>{
+    const blog=new Blog({
+        title:'new blog 2',
+        type:'about my blog',
+        body:'more about my new blog'
+    });
+    blog.save()
+      .then((result)=>{
+        res.send(result)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+})
 
+app.get('/all-blogs', (req,res)=>{
+  Blog.find()
+    .then((result)=>{
+      res.send(result)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+})
 app.get('/', (req,res)=>{
-    res.render('main');
+    res.redirect('/blogs');
 })
 
 app.get('/about', (req,res)=>{
@@ -23,11 +56,38 @@ app.get('/about', (req,res)=>{
 })
 
 
+// Blog routes
+
+app.get('/blogs',(req,res)=>{
+  Blog.find().sort({createdAt:-1})
+    .then((result)=>{
+      res.render('main', {title:"All Blogs", blogs:result})
+
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+})
+
+// post request
+
+app.post('/blogs',(req, res)=>{
+  const blog=new Blog(req.body);
+
+  blog.save()
+    .then((result)=>{
+      res.redirect('/blogs')
+
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+})
+
 app.get('/blogs/create', (req,res)=>{
     res.render('blogs')
 })
 
 app.use((req,res)=>{
     res.render('404')
-    console.log('404 file sent')
 })
