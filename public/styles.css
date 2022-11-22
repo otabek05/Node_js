@@ -102,3 +102,13 @@ textarea{
 button:hover{
     box-shadow: 0px 0px 10px rgb(177, 177, 177);
 }
+.delete{
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px grey;
+  position: absolute;
+  right: 10px;
+}
