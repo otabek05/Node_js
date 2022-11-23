@@ -108,7 +108,52 @@ button:hover{
   border: none;
   border-radius: 10px;
   padding: 10px;
+  margin-top: 45px;
   box-shadow: 0px 0px 10px grey;
-  position: absolute;
-  right: 10px;
+ width: 90px;
+ margin-bottom: 10px;
+}
+.img{
+  width: 400px;
+  height: 300px;
+  vertical-align: middle;
+}
+.details{
+  display: flex;
+  flex-direction: column;
+  border: none;
+  box-shadow: 0px 0px 10px grey;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+  border-radius: 10px;
+}
+.img-main{
+  width: 160px;
+  height: 120px;
+  border-radius: 40px;
+  margin-right: 10px;
+ border: none;
+}
+.single{
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.main{
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  margin: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px grey;
+}
+.order{
+  background-color: dodgerblue;
+  color: white;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
 }

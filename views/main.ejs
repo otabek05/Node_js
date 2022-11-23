@@ -5,13 +5,18 @@
     <%- include('./partial/nav.ejs') %>
 
     <div class="blogs content">
-        <h2>All Blogs</h2>
+        <h2>All Pizzas in the market</h2>
         <% if (blog.length>0){ %>
             <% blog.forEach(blog=>{ %>
+        <div class="main">
+            <img class="img-main" src="https://i2.wp.com/www.thursdaynightpizza.com/wp-content/uploads/2020/08/Peggy_AuthorPhoto_2020_15-scaled-e1632340052666.jpg?fit=5689%2C3727&ssl=1" alt="Not found">
             <a href="/blogs/ <%= blog._id %>" class="single">
                 <h3 class="title"><%= blog.title %></h3>
                 <p class="snippet"><%= blog.type %></p>
+                <p class="snippet"><i>$<%= blog.price %></i></p>    
+                <button>Order</button>
             </a>
+        </div>
         <% })%>
         <% } %>
     </div>

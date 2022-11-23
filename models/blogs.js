@@ -11,6 +11,11 @@ const blogSchema=new Schema({
         type:String,
         required:true
     },
+    price:{
+        type:Number,
+        required:true,
+
+    },
     body:{
         type:String,
         required:true
